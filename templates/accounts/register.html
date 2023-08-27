@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="flex items-center justify-center h-screen">
+    <form class="border border-blue-300">
+        {% for field in form %}
+        <div class="mb-6">
+            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{field.label_tag}}</label>
+            {{field}}
+        </div>
+        
+        {% endfor %}
+    </form>
+
+</div>
+
+{% endblock content %}
