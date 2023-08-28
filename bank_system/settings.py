@@ -40,6 +40,8 @@ INSTALLED_APPS = [
 
     #project app
     'theme',
+    'accounts',
+    'core',
 
     #third party app
     'tailwind',

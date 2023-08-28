@@ -8,12 +8,21 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		{% tailwind_css %}
+		<script src="{% static 'css/main.css' %}"></script>
 	</head>
 
 	<body class="bg-gray-50 font-serif leading-normal tracking-normal">
-		{% include 'common/navbar.html' %}
+		<div class="min-h-full">
+			{% include 'common/navbar.html' %}
+			<main>
+			  <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+				{% block content %}{% endblock content %}
+			  </div>
+			</main>
+		  </div>
+		
 
-		{% block content %}{% endblock content %}
+		
 
 
 
