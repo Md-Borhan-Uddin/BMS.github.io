@@ -22,7 +22,7 @@ class Account(models.Model):
 
 
 class Transaction(models.Model):
-    user = models.ForeignKey("auth.User", on_delete=models.CASCADE, related_name='transactions')
+    user = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='transactions')
     amount = models.DecimalField(_("Amount"),max_digits=12,decimal_places=2)
     transaction_type = models.CharField(_('Type'),choices=TransactionType.choices, max_length=10)
     create = models.DateTimeField(auto_now_add=True)

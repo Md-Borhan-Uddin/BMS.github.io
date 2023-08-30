@@ -1,6 +1,9 @@
-from typing import Any, Dict
+from typing import Any, Dict, Mapping, Optional, Type, Union
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
+from django.core.files.base import File
+from django.db.models.base import Model
+from django.forms.utils import ErrorList
 
 from accounts.models import Transaction
 
@@ -20,10 +23,37 @@ class TransactinForm(forms.ModelForm):
     class Meta:
         model = Transaction
         fields = ('amount',)
-
-
+    
+    def __init__(self, *args, **kwargs):
+        self.account = kwargs.pop('account')
+        return super().__init__(*args, **kwargs)
 
 class LoanForm(TransactinForm):
 
-    def clean(self):
+    def clean(self,*args, **kwargs):
+        print(self.account)
+        amount = self.cleaned_data.get('amount')
+        if amount<300:
+            raise forms.ValidationError('you do not get loan less then 300 ')
+        return super().clean()
+    
+
+
+class WithdrawForm(TransactinForm):
+
+    def clean(self,*args, **kwargs):
+        print(kwargs)
+        amount = self.cleaned_data.get('amount')
+        if amount<300:
+            raise forms.ValidationError('you do not get loan less then 300 ')
+        return super().clean()
+    
+
+class DepositForm(TransactinForm):
+
+    def clean(self,*args, **kwargs):
+        print(kwargs)
+        amount = self.cleaned_data.get('amount')
+        if amount<300:
+            raise forms.ValidationError('you do not get loan less then 300 ')
         return super().clean()
